@@ -1,4 +1,10 @@
-<li [class]="getItemVariant()"> {{name}}
-  <span [class]="getBadgeVariant()"> {{getComplete()}} </span>
-  <button mat-stroked-button (click)="toggleComplete()">{{getButtonText()}}</button>
+
+<li [class]="getItemVariant()">
+      {{name}}
+      <input type="text" [(ngModel)]="name">
+      <span [class]="getBadgeVariant()"> {{getComplete()}} </span>
+
+    <button  class="btn btn-outline-dark float-end" (click)="toggleComplete()">{{getButtonText()}}</button>
 </li>
+
+

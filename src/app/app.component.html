@@ -1,5 +1,10 @@
+<div class="check-section">
+  <mat-icon matBadge={{count}} matBadgeColor="warn">check</mat-icon>
+</div>
+
 <ul>
-  <app-task></app-task>
-  <app-task></app-task>
-  <app-task></app-task>
+  <app-task [name]="name1" (count)="setCount($event)"></app-task>
+  <app-task [name]="name2" (count)="setCount($event)"></app-task>
+  <app-task [name]="name3" (count)="setCount($event)"></app-task>
 </ul>
+
