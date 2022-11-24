@@ -19,7 +19,7 @@ export class TaskComponent {
   }
 
   getBadgeVariant() : string{
-    return this.complete? "d-inline float-right badge badge-success": "d-inline float-right badge badge-warning";
+    return this.complete? "d-inline float-end badge text-bg-success ": "d-inline float-end badge text-bg-warning";
   }
 
   getItemVariant() :string{
@@ -33,7 +33,7 @@ export class TaskComponent {
   // cours et « Annuler » si la tâche est terminée et qui doit
   // s’interpoler dans le texte du bouton.
   getButtonText() :string{
-    if (this.getComplete() == "termineée") {
+    if (this.getComplete() == "terminée") {
       return "Annuler";
     }else{
       return "Terminer";
