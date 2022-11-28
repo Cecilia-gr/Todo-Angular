@@ -2,9 +2,12 @@
   <mat-icon matBadge={{count}} matBadgeColor="warn">check</mat-icon>
 </div>
 
-<ul>
-  <app-task [name]="name1" (count)="setCount($event)"></app-task>
-  <app-task [name]="name2" (count)="setCount($event)"></app-task>
-  <app-task [name]="name3" (count)="setCount($event)"></app-task>
+
+<ul *ngIf="tasks.length > 0; else elseBlock">
+  <app-task *ngFor="let task of tasks; trackBy:trackByFunction" [task]="task" (count)="setCount($event)"  >
+  </app-task>
+
 </ul>
+
+<ng-template  #elseBlock> Il n'y a pas de tâche(s)</ng-template>
 

@@ -1,10 +1,10 @@
 
 <li [class]="getItemVariant()">
-      {{name}}
-      <input type="text" [(ngModel)]="name">
+      {{task.title}}
+      <input type="text" [(ngModel)]="task.title">
       <span [class]="getBadgeVariant()"> {{getComplete()}} </span>
+      <p>{{task.description}}</p>
 
     <button  class="btn btn-outline-dark float-end" (click)="toggleComplete()">{{getButtonText()}}</button>
 </li>
-
 
