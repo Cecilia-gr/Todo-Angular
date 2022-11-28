@@ -11,6 +11,7 @@ export class AppComponent {
 
   public tasks: Task[];
   count: number;
+  public pct :number;
 
 
   constructor() {
@@ -21,10 +22,14 @@ export class AppComponent {
     ]
 
     this.count = 0;
+    this.pct = 0;
   }
 
   setCount(n: number) {
     this.count += n;
+    this.pct= Math.floor(this.count/this.tasks.length*100);
+
+
   }
 
   ngOnInit (tasks:Array<Task> = this.tasks) : void{
@@ -32,6 +37,9 @@ export class AppComponent {
     for (const t of tasks) {
       t.complete? this.count+=1: this.count;
     }
+
+    this.pct= Math.floor(this.count/tasks.length*100);
+
   }
 
   trackByFunction(index: number, item: any): string {

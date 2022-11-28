@@ -2,6 +2,14 @@
   <mat-icon matBadge={{count}} matBadgeColor="warn">check</mat-icon>
 </div>
 
+<div [ngSwitch]="true">
+  <p *ngSwitchCase="pct == 0">0%</p>
+  <p *ngSwitchCase="pct>0 && pct<51">50%</p>
+  <p *ngSwitchCase="(pct >51 &&  pct<99)">99%</p>
+
+  <p *ngSwitchDefault>Fini ! </p>
+  </div>
+
 
 <ul *ngIf="tasks.length > 0; else elseBlock">
   <app-task *ngFor="let task of tasks; trackBy:trackByFunction" [task]="task" (count)="setCount($event)"  >
