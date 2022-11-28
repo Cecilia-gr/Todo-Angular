@@ -9,6 +9,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatBadgeModule} from '@angular/material/badge';
 import { FormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
+import { TodolistService } from './services/todolist.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import {MatIconModule} from '@angular/material/icon';
     FormsModule,
     MatIconModule
   ],
-  providers: [],
+  providers: [
+    TodolistService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -10,8 +10,8 @@
 </div>
 
 
-<ul *ngIf="tasks.length > 0; else elseBlock">
-  <app-task *ngFor="let task of tasks; trackBy:trackByFunction" [task]="task" (count)="setCount($event)">
+<ul *ngIf="todolistService.tasks.length > 0; else elseBlock">
+  <app-task *ngFor="let task of todolistService.tasks; trackBy:trackByFunction" [task]="task" (count)="setCount($event)">
   </app-task>
 
 </ul>

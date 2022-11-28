@@ -1,45 +1,48 @@
 import { Component, Output } from '@angular/core';
-import { Task } from './class/task.model';
+// import { Task } from './class/task.model';
+import { TodolistService } from './services/todolist.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [TodolistService]
 })
 export class AppComponent {
   title = 'todo';
 
-  public tasks: Task[];
+  // public tasks: any[];
+  // tasks: import("./class/task.model").Task[];
+  // public tasks : Task[];
+
   count: number;
   public pct: number;
 
 
-  constructor() {
-    this.tasks = [
-      new Task(1, "Se lever", true, "Lorem ipsum dolor sit amet consectetur adipisicing elit. "),
-      new Task(2, "S'étirer ", false, "Lorem ipsum dolor sit amet consectetur adipisicing elit. "),
-      new Task(3, "Raller ", false, "Lorem ipsum dolor sit amet consectetur adipisicing elit. ")
-    ]
-
+  constructor(public todolistService: TodolistService) {
+    // this.tasks = [
+    //   new Task(1, "Se lever", true, "Lorem ipsum dolor sit amet consectetur adipisicing elit."),
+    //   new Task(2, "S'étirer ", false, "Lorem ipsum dolor sit amet consectetur adipisicing elit."),
+    //   new Task(3, "Raller ", false, "Lorem ipsum dolor sit amet consectetur adipisicing elit.")
+    // ]
+    // this.tasks = todolistService.tasks;
     this.count = 0;
     this.pct = 0;
   }
 
   setCount(n: number) {
     this.count += n;
-    this.pct = Math.floor(this.count / this.tasks.length * 100);
+    this.pct = Math.floor(this.count / this.todolistService.tasks.length * 100);
 
 
   }
 
-  ngOnInit(tasks: Array<Task> = this.tasks): void {
-
-    for (const t of tasks) {
+  ngOnInit(): void {
+    for (const t of this.todolistService.tasks) {
       t.complete ? this.count += 1 : this.count;
     }
 
-    this.pct = Math.floor(this.count / tasks.length * 100);
-
+    this.pct = Math.floor(this.count / this.todolistService.tasks.length * 100);
   }
 
   trackByFunction(index: number, item: any): string {
