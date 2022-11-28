@@ -1,6 +1,6 @@
 
 <li [class]="getItemVariant()">
-      {{task.title}}
+      {{task.title}} {{task.created | date:'d/M/Y HH:mm'}}
       <input type="text" [(ngModel)]="task.title">
       <span [class]="getBadgeVariant()"> {{getComplete()}} </span>
       <p>{{task.description}}</p>
