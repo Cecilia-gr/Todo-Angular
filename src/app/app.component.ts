@@ -11,14 +11,14 @@ export class AppComponent {
 
   public tasks: Task[];
   count: number;
-  public pct :number;
+  public pct: number;
 
 
   constructor() {
     this.tasks = [
-      new Task(1, "test1", true, "testest1"),
-      new Task(2, "test2", false, "testest2"),
-      new Task(3, "test3", false, "testest3")
+      new Task(1, "Se lever", true, "Lorem ipsum dolor sit amet consectetur adipisicing elit. "),
+      new Task(2, "S'étirer ", false, "Lorem ipsum dolor sit amet consectetur adipisicing elit. "),
+      new Task(3, "Raller ", false, "Lorem ipsum dolor sit amet consectetur adipisicing elit. ")
     ]
 
     this.count = 0;
@@ -27,24 +27,24 @@ export class AppComponent {
 
   setCount(n: number) {
     this.count += n;
-    this.pct= Math.floor(this.count/this.tasks.length*100);
+    this.pct = Math.floor(this.count / this.tasks.length * 100);
 
 
   }
 
-  ngOnInit (tasks:Array<Task> = this.tasks) : void{
+  ngOnInit(tasks: Array<Task> = this.tasks): void {
 
     for (const t of tasks) {
-      t.complete? this.count+=1: this.count;
+      t.complete ? this.count += 1 : this.count;
     }
 
-    this.pct= Math.floor(this.count/tasks.length*100);
+    this.pct = Math.floor(this.count / tasks.length * 100);
 
   }
 
   trackByFunction(index: number, item: any): string {
     return item.id;
-    }
+  }
 
 
 }

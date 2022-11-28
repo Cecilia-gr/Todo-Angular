@@ -6,16 +6,14 @@
   <p *ngSwitchCase="pct == 0">0%</p>
   <p *ngSwitchCase="pct>0 && pct<51">50%</p>
   <p *ngSwitchCase="(pct >51 &&  pct<99)">99%</p>
-
-  <p *ngSwitchDefault>Fini ! </p>
-  </div>
+  <p *ngSwitchDefault>Fini !</p>
+</div>
 
 
 <ul *ngIf="tasks.length > 0; else elseBlock">
-  <app-task *ngFor="let task of tasks; trackBy:trackByFunction" [task]="task" (count)="setCount($event)"  >
+  <app-task *ngFor="let task of tasks; trackBy:trackByFunction" [task]="task" (count)="setCount($event)">
   </app-task>
 
 </ul>
 
-<ng-template  #elseBlock> Il n'y a pas de tâche(s)</ng-template>
-
+<ng-template #elseBlock> Il n'y a pas de tâche(s)</ng-template>

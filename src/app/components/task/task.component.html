@@ -1,10 +1,8 @@
 
-<li [class]="getItemVariant()">
-      {{task.title}} {{task.created | date:'d/M/Y HH:mm'}}
+<li [class]="getItemVariant()" class="listyle">
+      {{task.title}} - {{task.created | date:'d/M/Y HH:mm'}}
       <input type="text" [(ngModel)]="task.title">
       <span [class]="getBadgeVariant()"> {{getComplete()}} </span>
       <p>{{task.description}}</p>
-
     <button  class="btn btn-outline-dark float-end" (click)="toggleComplete()">{{getButtonText()}}</button>
 </li>
-

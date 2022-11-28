@@ -11,10 +11,6 @@ export class TaskComponent {
   @Output() count = new EventEmitter<number>();
   @Input() task!: Task ;
 
-
-
-
-
   constructor() {
     this.count;
   }
@@ -39,9 +35,7 @@ export class TaskComponent {
 
 
   }
-  // qui retourne « Terminer » si la tâche est en
-  // cours et « Annuler » si la tâche est terminée et qui doit
-  // s’interpoler dans le texte du bouton.
+
   getButtonText(): string {
     if (this.getComplete() == "terminée") {
       return "Annuler";
