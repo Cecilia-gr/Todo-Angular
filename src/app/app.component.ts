@@ -32,7 +32,8 @@ export class AppComponent {
 
   setCount(n: number) {
     this.count += n;
-    this.pct = Math.floor(this.count / this.todolistService.tasks.length * 100);
+    if (this.todolistService.tasks.length > 0)
+      this.pct = Math.floor(this.count / this.todolistService.tasks.length * 100);
 
 
   }
@@ -42,7 +43,8 @@ export class AppComponent {
       t.complete ? this.count += 1 : this.count;
     }
 
-    this.pct = Math.floor(this.count / this.todolistService.tasks.length * 100);
+    if (this.todolistService.tasks.length > 0)
+      this.pct = Math.floor(this.count / this.todolistService.tasks.length * 100);
   }
 
   trackByFunction(index: number, item: any): string {
