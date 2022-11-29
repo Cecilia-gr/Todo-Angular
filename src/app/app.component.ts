@@ -32,19 +32,21 @@ export class AppComponent {
 
   setCount(n: number) {
     this.count += n;
+    this.pourcent();
+  }
+
+  pourcent() :number{
     if (this.todolistService.tasks.length > 0)
       this.pct = Math.floor(this.count / this.todolistService.tasks.length * 100);
 
-
+    return this.pct;
   }
 
   ngOnInit(): void {
     for (const t of this.todolistService.tasks) {
       t.complete ? this.count += 1 : this.count;
     }
-
-    if (this.todolistService.tasks.length > 0)
-      this.pct = Math.floor(this.count / this.todolistService.tasks.length * 100);
+    this.pourcent();
   }
 
   trackByFunction(index: number, item: any): string {
