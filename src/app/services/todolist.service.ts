@@ -36,13 +36,25 @@ export class TodolistService {
   //   }, 1000)
   // )
 
+  get nbTasks() :number{
+    let val = this.tasks.length;
+    return val;
+  }
+
+  get pourcent(): number {
+    let val = this.tasks.length != 0 ? Math.floor(this.tasksTrue / this.nbTasks * 100) : 0;
+    return val;
+  }
+
+
+  get tasksTrue(): number {
+    let val = (this.tasks?.length) ? this.tasks.filter((task) => task.completed).length : 0;
+    return val;
+  }
+
+
   toggleComplete(id :number): void {
-
-    // this.task.complete ? this.count.emit(-1) : this.count.emit(1);
-
     this.tasks[id].completed = !this.tasks[id].completed;
-
-
   }
 
 }
