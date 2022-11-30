@@ -3,7 +3,7 @@
   <input type="text" [(ngModel)]="task.title">
   <!-- <span [class]="getBadgeVariant()"> -->
   <span
-    [ngClass]="task.complete ? 'd-inline float-end badge text-bg-success' : 'd-inline float-end badge text-bg-warning'">
+    [ngClass]="task.completed ? 'd-inline float-end badge text-bg-success' : 'd-inline float-end badge text-bg-warning'">
 
     {{getComplete()}} </span>
   <p>{{task.description}}</p>

@@ -10,28 +10,29 @@ import { Task } from 'src/app/class/task.model';
 export class TaskComponent {
   @Output() count = new EventEmitter<number>();
   @Input() task!: Task ;
+  @Input() id!: number
 
   constructor() {
     this.count;
   }
 
   getComplete(): string {
-    return this.task.complete ? "terminée" : "en cours";
+    return this.task.completed ? "terminée" : "en cours";
   }
 
   getBadgeVariant(): string {
-    return this.task.complete ? "d-inline float-end badge text-bg-success " : "d-inline float-end badge text-bg-warning";
+    return this.task.completed ? "d-inline float-end badge text-bg-success " : "d-inline float-end badge text-bg-warning";
   }
 
   getItemVariant(): string {
-    return this.task.complete ? "list-group-item list-group-item-success" : "list-group-item list-group-item-warning";
+    return this.task.completed ? "list-group-item list-group-item-success" : "list-group-item list-group-item-warning";
   }
 
   toggleComplete(): void {
 
-    this.task.complete ? this.count.emit(-1) : this.count.emit(1);
+    this.task.completed ? this.count.emit(-1) : this.count.emit(1);
 
-    this.task.complete = !this.task.complete;
+    this.task.completed = !this.task.completed;
 
 
   }

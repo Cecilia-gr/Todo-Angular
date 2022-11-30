@@ -1,17 +1,17 @@
 <div class="check-section">
-  <mat-icon matBadge={{count}} matBadgeColor="warn">check</mat-icon>
+  <mat-icon matBadge={{tasksTrue}} matBadgeColor="warn">check</mat-icon>
 </div>
 
 <div [ngSwitch]="true">
-  <p *ngSwitchCase="pct == 0">0%</p>
-  <p *ngSwitchCase="pct>0 && pct<51">50%</p>
-  <p *ngSwitchCase="(pct >51 &&  pct<99)">99%</p>
+  <p *ngSwitchCase="pourcent == 0">0% </p>
+  <p *ngSwitchCase="pourcent >0 && pourcent<51">50%</p>
+  <p *ngSwitchCase="pourcent >51 &&  pourcent<99">99%</p>
   <p *ngSwitchDefault>Fini !</p>
 </div>
 
 
 <ul *ngIf="todolistService.tasks.length > 0; else elseBlock">
-  <app-task *ngFor="let task of todolistService.tasks; trackBy:trackByFunction" [task]="task" (count)="setCount($event)">
+  <app-task *ngFor="let task of todolistService.tasks; trackBy:trackByFunction; let i = index"  [id]="i" [task]="task">
   </app-task>
 
 </ul>

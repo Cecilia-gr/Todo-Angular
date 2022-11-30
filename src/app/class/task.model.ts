@@ -1,14 +1,14 @@
 export class Task {
 id:number;
 title : string;
-complete : boolean;
+completed : boolean;
 description : string;
 created : string;
 
-  constructor(id : number=0, title:string="", complete:boolean=true, description:string="") {
+  constructor(id : number=0, title:string="", completed:boolean=true, description:string="") {
     this.id = id;
     this.title = title;
-    this.complete = complete;
+    this.completed = completed;
     this.description = description;
     this.created = Date();
   }
