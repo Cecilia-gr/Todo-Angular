@@ -1,6 +1,7 @@
 import { computeMsgId } from '@angular/compiler';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from 'src/app/class/task.model';
+import { TodolistService } from 'src/app/services/todolist.service';
 
 @Component({
   selector: 'app-task',
@@ -10,9 +11,9 @@ import { Task } from 'src/app/class/task.model';
 export class TaskComponent {
   @Output() count = new EventEmitter<number>();
   @Input() task!: Task ;
-  @Input() id!: number
+  @Input() id!: number;
 
-  constructor() {
+  constructor(public todoListService : TodolistService) {
     this.count;
   }
 
@@ -28,14 +29,12 @@ export class TaskComponent {
     return this.task.completed ? "list-group-item list-group-item-success" : "list-group-item list-group-item-warning";
   }
 
-  toggleComplete(): void {
+  // toggleComplete(): void {
 
-    this.task.completed ? this.count.emit(-1) : this.count.emit(1);
+  //   this.task.completed ? this.count.emit(-1) : this.count.emit(1);
 
-    this.task.completed = !this.task.completed;
-
-
-  }
+  //   this.task.completed = !this.task.completed;
+  // }
 
   getButtonText(): string {
     if (this.getComplete() == "terminée") {

@@ -39,7 +39,6 @@ export class AppComponent {
 
   get pourcent(): number {
     let val = this.todolistService.tasks.length != 0 ? Math.floor(this.tasksTrue / this.nbTasks * 100) : 0;
-    console.log(val);
     return val;
   }
 
