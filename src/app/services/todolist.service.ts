@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Task } from '../class/task.model';
 
 const initialList = [
-  new Task(1, "Se lever", true, "Lorem ipsum dolor sit amet consectetur adipisicing elit."),
-  new Task(2, "S'étirer ", false, "Lorem ipsum dolor sit amet consectetur adipisicing elit."),
-  new Task(3, "Raller ", false, "Lorem ipsum dolor sit amet consectetur adipisicing elit.")
+  new Task("Se lever", true, "Lorem ipsum dolor sit amet consectetur adipisicing elit."),
+  new Task("S'étirer ", false, "Lorem ipsum dolor sit amet consectetur adipisicing elit."),
+  new Task("Raller ", false, "Lorem ipsum dolor sit amet consectetur adipisicing elit.")
 ];
 
 

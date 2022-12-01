@@ -11,7 +11,7 @@
 
 
 <ul *ngIf="todolistService.tasks.length > 0; else elseBlock">
-  <app-task *ngFor="let task of todolistService.tasks; trackBy:trackByFunction; let i = index"  [id]="i" [task]="task">
+  <app-task *ngFor="let task of todolistService.tasks; trackBy:trackByFunction" [task]="task">
   </app-task>
 
 </ul>

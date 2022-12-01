@@ -9,12 +9,20 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatBadgeModule} from '@angular/material/badge';
 import { FormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
+import { TodolistComponent } from './components/todolist/todolist.component';
+import { NavComponent } from './components/nav/nav.component';
+import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
 // import { TodolistService } from './services/todolist.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TaskComponent
+    TaskComponent,
+    TodolistComponent,
+    NavComponent,
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

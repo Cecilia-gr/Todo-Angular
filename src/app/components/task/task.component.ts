@@ -11,7 +11,7 @@ import { TodolistService } from 'src/app/services/todolist.service';
 export class TaskComponent {
   // @Output() count = new EventEmitter<number>();
   @Input() task!: Task;
-  @Input() id!: number;
+  // @Input() id!: number;
 
   constructor(public todolistService: TodolistService) {
     // this.count;
@@ -30,7 +30,7 @@ export class TaskComponent {
   }
 
   toggleComplete(): void {
-    this.todolistService.toggleComplete(this.id);
+    this.todolistService.toggleComplete(this.task.id);
   }
 
   getButtonText(): string {

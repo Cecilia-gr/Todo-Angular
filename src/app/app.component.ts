@@ -1,5 +1,4 @@
 import { Component, Output } from '@angular/core';
-import { Task } from './class/task.model';
 import { TodolistService } from './services/todolist.service';
 
 @Component({
@@ -10,6 +9,7 @@ import { TodolistService } from './services/todolist.service';
 })
 export class AppComponent {
   title = 'todo';
+  
   constructor(public todolistService: TodolistService) {
   }
 
