@@ -1,19 +1,2 @@
-<div class="check-section">
-  <mat-icon matBadge={{todolistService.tasksTrue}} matBadgeColor="warn">check</mat-icon>
-</div>
-
-<div [ngSwitch]="true">
-  <p *ngSwitchCase="todolistService.pourcent == 0">0% </p>
-  <p *ngSwitchCase="todolistService.pourcent >0 && todolistService.pourcent<51">50%</p>
-  <p *ngSwitchCase="todolistService.pourcent >51 &&  todolistService.pourcent<99">99%</p>
-  <p *ngSwitchDefault>Fini !</p>
-</div>
-
-
-<ul *ngIf="todolistService.tasks.length > 0; else elseBlock">
-  <app-task *ngFor="let task of todolistService.tasks; trackBy:trackByFunction" [task]="task">
-  </app-task>
-
-</ul>
-
-<ng-template #elseBlock> Il n'y a pas de tâche(s)</ng-template>
+<app-nav></app-nav>
+<app-todolist></app-todolist>
