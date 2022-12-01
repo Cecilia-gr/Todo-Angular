@@ -25,17 +25,9 @@ export class TodolistService {
       setTimeout(() => {
         this.tasks = list;
       }, 1000)
-      // return "test";
     })
   }
-
-  //   this.prom = new Promise(() =>
-  //   setTimeout(() => {
-  //     console.log('test');
-
-  //   }, 1000)
-  // )
-
+  
   get nbTasks() :number{
     let val = this.tasks.length;
     return val;

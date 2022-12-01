@@ -5,5 +5,20 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
-  constructor() { }
+  isAuth : boolean;
+
+  constructor() {
+    this.isAuth = false ;
+  }
+
+  login(){
+    setTimeout(() => {
+      this.isAuth = true;
+    }, 1000)
+  }
+
+  logout(){
+      this.isAuth = false;
+  }
+
 }
