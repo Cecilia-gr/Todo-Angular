@@ -1,7 +1,5 @@
-<div *ngIf="auth.isAuth == false; else logout">
   <app-login></app-login>
-</div>
-
-<ng-template #logout>
   <app-logout></app-logout>
-</ng-template>
+<a routerLink='todolist' routerLinkActive="active">todolist</a>
+<a routerLink='login'  routerLinkActive="active">blabla</a>
+
