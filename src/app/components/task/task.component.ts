@@ -2,6 +2,7 @@ import { computeMsgId } from '@angular/compiler';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from 'src/app/class/task.model';
 import { TodolistService } from 'src/app/services/todolist.service';
+import { TaskdetailsComponent } from '../taskdetails/taskdetails.component';
 
 @Component({
   selector: 'app-task',
@@ -9,13 +10,9 @@ import { TodolistService } from 'src/app/services/todolist.service';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent {
-  // @Output() count = new EventEmitter<number>();
   @Input() task!: Task;
-  // @Input() id!: number;
 
-  constructor(public todolistService: TodolistService) {
-    // this.count;
-  }
+  constructor(public todolistService: TodolistService,) {}
 
   getComplete(): string {
     return this.task.completed ? "terminée" : "en cours";

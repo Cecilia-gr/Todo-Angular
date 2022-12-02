@@ -1,2 +1,2 @@
-<button *ngIf="auth.isAuth; else elseBlock" color="warn" (click)="auth.logout()">Logout</button>
-<ng-template #elseBlock><p>Vous êtes déjà déconnecté !!</p></ng-template>
+<button mat-stroked-button color="warn" *ngIf="auth.isAuth; else elseBlock" color="warn" (click)="auth.logout()">Logout</button>
+<ng-template #elseBlock><p>Vous êtes déconnecté !!</p></ng-template>

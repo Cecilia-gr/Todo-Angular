@@ -49,4 +49,8 @@ export class TodolistService {
     this.tasks[id].completed = !this.tasks[id].completed;
   }
 
+  getTaskById(id: number): Task{
+    return this.tasks[id]
+  }
+
 }
