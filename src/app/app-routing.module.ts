@@ -6,12 +6,13 @@ import { TaskdetailsComponent } from './components/taskdetails/taskdetails.compo
 import { TodolistComponent } from './components/todolist/todolist.component';
 
 const routes: Routes = [
-  {path:'todolist/', component:TaskdetailsComponent},
-  {path:'todolist', component:TodolistComponent},
   {path:'login', component:LoginComponent},
-  {path:'', component:TodolistComponent},
+  {path:'todolist/:id', component:TaskdetailsComponent},
+  {path:'todolist', component:TodolistComponent},
   {path:'404', component:NotfoundComponent},
   {path:'**', redirectTo: '/404'},
+  {path:'', component:TodolistComponent},
+
 
 
 ];

@@ -1,1 +1,6 @@
-<p>taskdetails works!</p>
+<mat-card>
+    <mat-card-content>
+            <p>{{task?.title}} - {{task?.created | date:'d/M/Y HH:mm'}} - {{task?.completed}}</p>
+            <p>{{task?.description}}</p>
+    </mat-card-content>
+  </mat-card>

@@ -9,18 +9,23 @@ import { TodolistService } from 'src/app/services/todolist.service';
   styleUrls: ['./taskdetails.component.scss']
 })
 export class TaskdetailsComponent {
+  public task: Task | null;
 
 
   constructor(
-    public todo : TodolistService,
-    public route : ActivatedRoute,
-    public task :Task
-  ){}
+    public todo: TodolistService,
+    public route: ActivatedRoute,
 
-  ngOnnit() {
-     this.route.queryParamMap.subscribe((params: ParamMap) =>{
-     let id  = Number(params.get('id'));
-     this.task = this.todo.getTaskById(id);
-     })
+  ) {
+    this.task = null;
+   }
+
+  ngOnInit() :void{
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      let id = Number(params.get('id'));
+      this.task = this.todo.getTaskById(id);
+      console.log(this.task);
+      
+    })
   }
 }

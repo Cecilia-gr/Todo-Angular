@@ -1,5 +1,7 @@
 <li [class]="getItemVariant()" class="listyle">
-  <a [routerLink]="['/todolist']" [queryParams]="{id: task.id}" routerLinkActive="active">{{task.title}} </a> - {{task.created | date:'d/M/Y HH:mm'}}
+  <a [routerLink]="['/todolist', task.id]">{{task.title}} </a>  
+  <!--  [queryParams]="{id: task.id}"  -->
+  - {{task.created | date:'d/M/Y HH:mm'}}
   <input type="text" [(ngModel)]="task.title">
   <!-- <span [class]="getBadgeVariant()"> -->
   <span
