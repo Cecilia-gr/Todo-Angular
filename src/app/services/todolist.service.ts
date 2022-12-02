@@ -50,7 +50,7 @@ export class TodolistService {
   }
 
   getTaskById(id: number): Task | null{
-    return this.tasks[id]
+    return this.tasks.filter(task => task.id == id )[0];//récupér une liste de trask ayant comme "id" comme id, liste d'1 seul item , ici 
   }
 
 }

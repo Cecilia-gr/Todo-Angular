@@ -4,16 +4,22 @@ import { LoginComponent } from './components/login/login.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { TaskdetailsComponent } from './components/taskdetails/taskdetails.component';
 import { TodolistComponent } from './components/todolist/todolist.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  {path:'login', component:LoginComponent},
-  {path:'todolist/:id', component:TaskdetailsComponent},
-  {path:'todolist', component:TodolistComponent},
-  {path:'404', component:NotfoundComponent},
-  {path:'**', redirectTo: '/404'},
-  {path:'', component:TodolistComponent},
+  { path: 'login', component: LoginComponent },
 
-
+  {
+    path: '',
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', component: TodolistComponent, pathMatch: 'full' },
+      { path: 'todolist/:id', component: TaskdetailsComponent },
+      { path: 'todolist', component: TodolistComponent, pathMatch: 'full' }
+    ]
+  },
+  { path: '404', component: NotfoundComponent },
+  { path: '**', redirectTo: '/404' },
 
 ];
 
