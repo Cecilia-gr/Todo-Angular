@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Task } from '../class/task.model';
 
 const initialList = [
@@ -15,21 +15,24 @@ const toDoListSubject = new Subject();
 })
 export class TodolistService {
   private tasks: Task[];
-
+  private _task : BehaviorSubject<Task[]>;
+  private readonly task$ :Observable<Task[]>;
+  public prom!: Promise<string>;
 
   constructor() {
     this.tasks = [];
-    this.updateList(initialList)
-  }
-
-  async updateList(list: Task[]): Promise<void> {
-    this.tasks = await new Promise<Task[]>(() => {
+    this._task = new BehaviorSubject<Task[]>(this.tasks);
+    this.task$ = this._task.asObservable();
+    this.prom = new Promise<string>((resolve) => {
       setTimeout(() => {
-        this.tasks = list;
+        this.tasks = initialList;
+        this.emiter(this.tasks);
+        resolve('fini');
       }, 1000)
     })
+
   }
-  
+
   get nbTasks() :number{
     let val = this.tasks.length;
     return val;
@@ -52,14 +55,16 @@ export class TodolistService {
   }
 
   getTaskById(id: number): Task | null{
-    return this.tasks.filter(task => task.id == id )[0];//récupér une liste de trask ayant comme "id" comme id, liste d'1 seul item , ici 
+    return this.tasks.filter(task => task.id == id )[0];//récupér une liste de trask ayant comme "id" comme id, liste d'1 seul item , ici
   }
 
-  getList(){
-
-
+  getTasks() : Observable<Task[]>{
+    return this.task$;
   }
 
-  
+  emiter(tasks: Task[] = this.tasks):void{
+    this._task.next(Object.assign([], tasks))
+  }
+
 
 }
