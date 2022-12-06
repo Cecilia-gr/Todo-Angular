@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { Task } from '../class/task.model';
 
 const initialList = [
@@ -7,12 +8,13 @@ const initialList = [
   new Task("Raller ", false, "Lorem ipsum dolor sit amet consectetur adipisicing elit.")
 ];
 
+const toDoListSubject = new Subject();
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodolistService {
-  public tasks: Task[];
+  private tasks: Task[];
 
 
   constructor() {
@@ -52,5 +54,12 @@ export class TodolistService {
   getTaskById(id: number): Task | null{
     return this.tasks.filter(task => task.id == id )[0];//récupér une liste de trask ayant comme "id" comme id, liste d'1 seul item , ici 
   }
+
+  getList(){
+
+
+  }
+
+  
 
 }
