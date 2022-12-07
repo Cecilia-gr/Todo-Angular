@@ -16,6 +16,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { TaskdetailsComponent } from './components/taskdetails/taskdetails.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
+import { TaskFormComponent } from './components/task-form/task-form.component';
 // import { TodolistService } from './services/todolist.service';
 
 @NgModule({
@@ -27,7 +28,8 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
     LoginComponent,
     LogoutComponent,
     TaskdetailsComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    TaskFormComponent
   ],
   imports: [
     BrowserModule,

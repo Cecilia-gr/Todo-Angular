@@ -15,8 +15,8 @@ const toDoListSubject = new Subject();
 })
 export class TodolistService {
   private tasks: Task[];
-  private _task : BehaviorSubject<Task[]>;
-  private readonly task$ :Observable<Task[]>;
+  private _task: BehaviorSubject<Task[]>;
+  private readonly task$: Observable<Task[]>;
   public prom!: Promise<string>;
 
   constructor() {
@@ -33,7 +33,7 @@ export class TodolistService {
 
   }
 
-  get nbTasks() :number{
+  get nbTasks(): number {
     let val = this.tasks.length;
     return val;
   }
@@ -50,20 +50,27 @@ export class TodolistService {
   }
 
 
-  toggleComplete(id :number): void {
+  toggleComplete(id: number): void {
     this.tasks[id].completed = !this.tasks[id].completed;
   }
 
-  getTaskById(id: number): Task | null{
-    return this.tasks.filter(task => task.id == id )[0];//récupér une liste de trask ayant comme "id" comme id, liste d'1 seul item , ici
+  getTaskById(id: number): Task | null {
+    return this.tasks.filter(task => task.id == id)[0];//récupér une liste de trask ayant comme "id" comme id, liste d'1 seul item , ici
   }
 
-  getTasks() : Observable<Task[]>{
+  getTasks(): Observable<Task[]> {
     return this.task$;
   }
 
-  emiter(tasks: Task[] = this.tasks):void{
+  emiter(tasks: Task[] = this.tasks): void {
     this._task.next(Object.assign([], tasks))
+  }
+
+  addTask(task: Task) {
+
+    let newTask = new Task(task.title, task.completed, task.description);
+    this.tasks.push(newTask);
+    this.emiter(this.tasks);
   }
 
 
