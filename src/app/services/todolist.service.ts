@@ -8,7 +8,7 @@ const initialList = [
   new Task("Raller ", false, "Lorem ipsum dolor sit amet consectetur adipisicing elit.")
 ];
 
-const toDoListSubject = new Subject();
+// const toDoListSubject = new Subject();
 
 @Injectable({
   providedIn: 'root'
@@ -67,9 +67,7 @@ export class TodolistService {
   }
 
   addTask(task: Task) {
-
-    let newTask = new Task(task.title, task.completed, task.description);
-    this.tasks.push(newTask);
+    this.tasks.push(task);
     this.emiter(this.tasks);
   }
 

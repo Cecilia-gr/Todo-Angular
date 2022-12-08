@@ -18,7 +18,7 @@ export class TaskFormComponent {
 
   onSumit(taskForm: NgForm){
     taskForm.value.completed = taskForm.value.completed == 1 ? true: false;
-    this.todo.addTask(taskForm.value);
+    this.todo.addTask(new Task(taskForm.value.title, taskForm.value.completed, taskForm.value.description));//taskForm.value
     this.router.navigate(['todolist']);
 
   }
