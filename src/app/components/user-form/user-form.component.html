@@ -1,0 +1,20 @@
+<form (ngSubmit)="onSumit(userForm)" [formGroup]="userForm">
+  <label for="">Prenom</label>
+  <input type="text" formControlName="firstName"  required>
+
+  <label for="">Nom</label>
+  <input type="text" formControlName="lastName"  required>
+
+  <label for="">Email</label>
+  <input type="email" formControlName="email"  required>
+
+  <label for="">Team</label>
+  <select formControlName="team" id="team"  required>
+    <option [value]="1">1</option>
+    <option [value]="2">2</option>
+  </select>
+
+
+
+  <button type="submit" [disabled]="!userForm.valid">Valider</button>
+</form>

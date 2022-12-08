@@ -18,6 +18,7 @@ import { TaskdetailsComponent } from './components/taskdetails/taskdetails.compo
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { TaskFormComponent } from './components/task-form/task-form.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
 // import { TodolistService } from './services/todolist.service';
 
 @NgModule({
@@ -31,7 +32,8 @@ import { UserListComponent } from './components/user-list/user-list.component';
     TaskdetailsComponent,
     NotfoundComponent,
     TaskFormComponent,
-    UserListComponent
+    UserListComponent,
+    UserFormComponent
   ],
   imports: [
     BrowserModule,
@@ -39,10 +41,10 @@ import { UserListComponent } from './components/user-list/user-list.component';
     BrowserAnimationsModule,
     MatButtonModule,
     MatBadgeModule,
-    FormsModule,
     MatIconModule,
     MatCardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
