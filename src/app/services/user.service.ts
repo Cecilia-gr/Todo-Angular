@@ -2,14 +2,16 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../class/user.model';
 
-const initialListUsers : User[] = [];
+const initialListUsers : User[] = [
+  new User("Marie", "Dubois", "m.dubois@mail.com")
+];
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private users : User[];
+  public users : User[];
   private _user: BehaviorSubject<User[]>;
   private readonly user$: Observable<User[]>;
   public prom!: Promise<string>;

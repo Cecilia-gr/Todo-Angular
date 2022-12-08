@@ -1,0 +1,8 @@
+<ul>
+  <li *ngFor="let user of userservice.users; trackBy:trackByFunction" >
+    <div>
+      {{user.firstName}} {{user.lastName}}
+
+    </div>
+  </li>
+</ul>
