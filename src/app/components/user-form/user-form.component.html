@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSumit(userForm)" [formGroup]="userForm">
+<form [formGroup]="userForm">
   <label for="">Prenom</label>
   <input type="text" formControlName="firstName"  required>
 
@@ -10,11 +10,19 @@
 
   <label for="">Team</label>
   <select formControlName="team" id="team"  required>
-    <option [value]="1">1</option>
-    <option [value]="2">2</option>
+    <option value="bleu">Bleu</option>
+    <option value="rouge">Rouge</option>
   </select>
 
+  <div formArrayName="skills">
+    <label for="" *ngFor="let skill of skills.controls; let i = index"> Skill {{i}}
+      <input type="text" formControlName="skill">
+    </label>
+<button (click)="addSkill()">Ajouter Skill</button>
+<button *ngIf="skills.length > 0" (click)="removeSkill()">Suprimer Skill</button>
+  </div>
 
 
-  <button type="submit" [disabled]="!userForm.valid">Valider</button>
+
+  <button (click)="onSumit(userForm)" type="submit" [disabled]="!userForm.valid">Valider</button>
 </form>

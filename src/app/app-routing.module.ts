@@ -20,10 +20,10 @@ const routes: Routes = [
       { path: 'todolist/:id', component: TaskdetailsComponent },
       { path: 'todolist', component: TodolistComponent, pathMatch: 'full' },
       { path: 'taskform', component: TaskFormComponent},
-      { path: 'userlist', component: UserListComponent}
+      { path: 'userlist', component: UserListComponent},
+      { path: 'userform', component: UserFormComponent}
     ]
   },
-  { path: 'userform', component: UserFormComponent},
   { path: '404', component: NotfoundComponent },
   { path: '**', redirectTo: '/404' },
 

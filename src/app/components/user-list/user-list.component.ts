@@ -23,7 +23,7 @@ export class UserListComponent {
 
   ngOnInit() {
     this.subscribe = this.user$.subscribe(user =>{this.users = user});
-    }
+  }
 
   ngOnDestroy(): void {
     this.subscribe?.unsubscribe();
