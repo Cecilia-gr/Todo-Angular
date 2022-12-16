@@ -2,7 +2,7 @@
   <div>
   <mat-card    *ngFor="let user of userservice.users; trackBy:trackByFunction" >
     <div>
-      {{user.firstName}} {{user.lastName}}
+      {{user.firstName}} {{user.lastName | uppercase}}
       <p>email {{user.email}}</p>
       <p>Team : {{user.team}}</p>
       <div *ngIf=" user.skills.length > 0 " >
