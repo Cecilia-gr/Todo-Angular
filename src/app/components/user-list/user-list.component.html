@@ -1,8 +1,17 @@
-<ul>
-  <li *ngFor="let user of userservice.users; trackBy:trackByFunction" >
+<!-- <ul> -->
+  <div>
+  <mat-card    *ngFor="let user of userservice.users; trackBy:trackByFunction" >
     <div>
       {{user.firstName}} {{user.lastName}}
-
+      <p>email {{user.email}}</p>
+      <p>Team : {{user.team}}</p>
+      <div *ngIf=" user.skills.length > 0 " >
+        Skills :
+        <ul *ngFor="let skill of user.skills; trackBy:trackByFunction">
+          {{skill}}
+        </ul>
+      </div>
     </div>
-  </li>
-</ul>
+  </mat-card>
+<!-- </ul> -->
+</div>

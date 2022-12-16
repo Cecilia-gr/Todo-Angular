@@ -3,7 +3,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../class/user.model';
 
 const initialListUsers : User[] = [
-  new User("Marie", "Dubois", "m.dubois@mail.com")
+  new User("Marie", "Dubois", "m.dubois@mail.com", "Bleu", ["manger", "dormir"]),
+  new User("Paul", "Jean", "p.jean@mail.com", "Bleu", [])
+
 ];
 
 
@@ -36,6 +38,8 @@ export class UserService {
 
   addUser(user: User) :void{
     this.users.push(user);
+    console.log(user);
+
     this.emiter(this.users);
   }
 

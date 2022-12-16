@@ -3,14 +3,15 @@
   <div class="row">
     <div class="col">
       <label for="">Prenom
-        <input type="text" class="form-control" placeholder="Prénom" aria-label="Prénom" formControlName="firstName" required>
+        <input type="text" class="form-control" placeholder="Prénom" aria-label="Prénom" formControlName="firstName"
+          required>
       </label>
-        </div>
+    </div>
     <div class="col">
       <label for="">Nom
         <input type="text" class="form-control" placeholder="Nom" aria-label="Nom" formControlName="lastName" required>
       </label>
-        </div>
+    </div>
   </div>
 
 
@@ -18,25 +19,28 @@
   <input type="text" formControlName="lastName" required> -->
 
   <label for="">Email
-  <input  class="form-control" type="email" formControlName="email" required>
-</label>
+    <input class="form-control" type="email" formControlName="email" required>
+  </label>
 
   <label for="">Team
-  <select  class="form-control" formControlName="team" id="team" required>
-    <option value="bleu">Bleu</option>
-    <option value="rouge">Rouge</option>
-  </select>
-</label>
+    <select class="form-control" formControlName="team" id="team" required>
+      <option value="bleu">Bleu</option>
+      <option value="rouge">Rouge</option>
+    </select>
+  </label>
+  <div>
+    <ul formArrayName="skills" for="" *ngFor="let skill of skills.controls; let i = index; trackBy:trackByFunction">
+      <li>
+        <label> Skill {{i}} </label>
 
-  <div formArrayName="skills">
-    <label  for="" *ngFor="let skill of skills.controls; let i = index"> Skill {{i}}
-      <input class="form-control" type="text" formControlName="skill">
-    </label>
+          <input class="form-control" type="text" [formControlName]="i" [value]="skill.value">
+          <button class="btn-close" *ngIf="skills.length > 0" (click)="removeSkill(i)"></button>
+      </li>
+    </ul>
     <button class="btn btn-outline-primary" (click)="addSkill()">Ajouter Skill</button>
-    <button class="btn btn-outline-primary" *ngIf="skills.length > 0" (click)="removeSkill()">Suprimer Skill</button>
+
   </div>
 
-
-
-  <button class="btn btn-primary" (click)="onSumit(userForm)" type="submit" [disabled]="!userForm.valid">Valider</button>
+  <button class="btn btn-primary" (click)="onSumit(userForm)" type="submit"
+    [disabled]="!userForm.valid">Valider</button>
 </form>

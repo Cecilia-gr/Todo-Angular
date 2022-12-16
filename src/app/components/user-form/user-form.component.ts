@@ -19,8 +19,8 @@ export class UserFormComponent {
  skills: FormArray;
 
   constructor(private fb : FormBuilder, private router: Router, private userservice : UserService){
-    this.firstName = this.fb.control('', [Validators.required, Validators.minLength(3)]);
-    this.lastName = this.fb.control('', [Validators.required, Validators.minLength(3)]);
+    this.firstName = this.fb.control('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]);
+    this.lastName = this.fb.control('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]);
     this.email = this.fb.control('', [Validators.required, Validators.email]);
     this.team = this.fb.control('', [Validators.required]);
     this.skills = this.fb.array(['']);
@@ -42,16 +42,22 @@ export class UserFormComponent {
   }
 
   addSkill() {//FormArray
-    this.skills.push(this.fb.control(''))
+    this.skills.push(this.fb.control('', [Validators.required]))
   }
 
-  removeSkill() {
-    this.skills.removeAt(this.skills.length-1);
+  removeSkill(index : number) {
+    this.skills.removeAt(index);
   }
 
 
   onSumit(userForm : FormGroup) :void{
-    this.userservice.addUser(new User(userForm.value.firstName, userForm.value.lastName, userForm.value.email, userForm.value.team));
+    this.userservice.addUser(new User(userForm.value.firstName, userForm.value.lastName, userForm.value.email, userForm.value.team, userForm.value.skills));
     this.router.navigate(['userlist']);
   }
+
+  trackByFunction
+  (index: number, item: any): string {
+  return item.id;
+}
+
 }

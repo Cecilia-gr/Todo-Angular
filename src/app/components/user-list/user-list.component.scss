@@ -1,0 +1,12 @@
+div {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10px auto;
+
+  mat-card {
+    margin-bottom: 10px;
+  }
+
+}
