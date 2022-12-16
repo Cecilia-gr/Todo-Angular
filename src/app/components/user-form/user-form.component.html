@@ -1,3 +1,4 @@
+
 <form [formGroup]="userForm">
 
   <div class="row">
@@ -6,41 +7,56 @@
         <input type="text" class="form-control" placeholder="Prénom" aria-label="Prénom" formControlName="firstName"
           required>
       </label>
+      <p *ngIf="firstName?.dirty && firstName?.hasError('required')">Prénom Requis</p>
+      <p *ngIf="firstName?.dirty && (firstName?.hasError('minlength') || firstName?.hasError('maxlength'))">Prénom doit faire entre 3 et 20 caratères</p>
+
+
     </div>
+
     <div class="col">
       <label for="">Nom
         <input type="text" class="form-control" placeholder="Nom" aria-label="Nom" formControlName="lastName" required>
       </label>
+      <p *ngIf="lastName?.dirty && lastName?.hasError('required')">Nom Requis</p>
+      <p *ngIf="lastName?.dirty && (lastName?.hasError('minlength') || lastName?.hasError('maxlength'))">Nom doit faire entre 3 et 20 caratères</p>
+
     </div>
   </div>
 
 
-  <!-- <label for="">Nom</label>
-  <input type="text" formControlName="lastName" required> -->
-
-  <label for="">Email
+  <label for="">Email </label>
     <input class="form-control" type="email" formControlName="email" required>
-  </label>
 
-  <label for="">Team
+  <p *ngIf="email?.dirty && email?.hasError('required')">Adresse mail Requise</p>
+  <p *ngIf="email?.dirty && email?.hasError('email')">Ce n'est pas une adresse mail valide ex: adresse@mail.fr</p>
+
+
+  <label for="">Team  </label>
     <select class="form-control" formControlName="team" id="team" required>
       <option value="bleu">Bleu</option>
       <option value="rouge">Rouge</option>
     </select>
-  </label>
-  <div>
+
+  <p *ngIf="team?.dirty && team?.hasError('required')">Veuillez selectionner une team</p>
+
+
+  <div id="skills">
+    <label> Skills : </label>
     <ul formArrayName="skills" for="" *ngFor="let skill of skills.controls; let i = index; trackBy:trackByFunction">
       <li>
-        <label> Skill {{i}} </label>
-
+        <!-- <label> Skill {{i}} </label> -->
+        <div class="skill">
           <input class="form-control" type="text" [formControlName]="i" [value]="skill.value">
           <button class="btn-close" *ngIf="skills.length > 0" (click)="removeSkill(i)"></button>
+        </div>
+        <p *ngIf="skill?.dirty && skill?.hasError('required')">Ex : Courir </p>
       </li>
     </ul>
+
     <button class="btn btn-outline-primary" (click)="addSkill()">Ajouter Skill</button>
 
   </div>
 
-  <button class="btn btn-primary" (click)="onSumit(userForm)" type="submit"
+  <button class="btn btn-primary" id="valider" (click)="onSumit(userForm)" type="submit"
     [disabled]="!userForm.valid">Valider</button>
 </form>
