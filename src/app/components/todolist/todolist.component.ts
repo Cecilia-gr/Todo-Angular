@@ -15,11 +15,6 @@ export class TodolistComponent {
 
   constructor(public todolistService: TodolistService) {}
 
-  trackByFunction
-    (index: number, item: any): string {
-    return item.id;
-  }
-
   ngOnInit() {
     this.task$ = this.todolistService.getTasks();
     this.getTasks();
@@ -31,6 +26,11 @@ export class TodolistComponent {
 
   ngOnDestroy() :void {
     this.subscribe?.unsubscribe();
+  }
+
+    trackByFunction
+    (index: number, item: any): string {
+    return item.id;
   }
 
 }

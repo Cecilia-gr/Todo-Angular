@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../class/user.model';
 
-const initialListUsers : User[] = [
-  new User("Marie", "Dubois", "m.dubois@mail.com", "Bleu", ["manger", "dormir"]),
-  new User("Paul", "Jean", "p.jean@mail.com", "Bleu", [])
+const initialList : User[] = [
+  new User("Marie", "Dubois", "m.dubois@mail.com", "Bleu", ["manger", "dormir"], "m.dubois", "azerty", 20),
+  new User("Paul", "Jean", "p.jean@mail.com", "Bleu", [], "pjean", "azerty", 25)
 
 ];
 
@@ -13,34 +14,35 @@ const initialListUsers : User[] = [
   providedIn: 'root'
 })
 export class UserService {
-  public users : User[];
-  private _user: BehaviorSubject<User[]>;
-  private readonly user$: Observable<User[]>;
-  public prom!: Promise<string>;
+  private users: User[];
+  private _users: BehaviorSubject<User[]>;
+  readonly users$: Observable<User[]>;
 
-
-  constructor() {
+  constructor(public router: Router) {
     this.users = [];
-    this._user = new BehaviorSubject<User[]>(this.users);
-    this.user$ = this._user.asObservable();
-    this.prom = new Promise<string>((resolve) => {
-      setTimeout(() => {
-        this.users = initialListUsers;
-        this.emiter(this.users);
-        resolve('fini');
-      }, 1000)
-    })
-   }
-
-   emiter(users: User[] = this.users): void {
-    this._user.next(Object.assign([], users))
+    this._users = new BehaviorSubject<User[]>([]);
+    this.users$ = this._users.asObservable();
+    this.init();
   }
 
-  addUser(user: User) :void{
-    this.users.push(user);
-    console.log(user);
-
+  private init(): void {
+    this.users = initialList;
     this.emiter(this.users);
   }
+
+  private emiter(users: User[]): void {
+    this._users.next(Object.assign([], users));
+  }
+
+  public getUsers$(): Observable<User[]> {
+    return this.users$;
+  }
+
+  public addUser(user: User): void {
+    this.users.push(user);
+    this.emiter(this.users);
+    this.router.navigate(['userlist']);
+  }
+
 
 }

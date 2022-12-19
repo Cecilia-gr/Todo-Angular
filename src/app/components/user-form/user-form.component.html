@@ -1,41 +1,42 @@
-
-<form [formGroup]="userForm">
+<form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)">
 
   <div class="row">
     <div class="col">
       <label for="">Prenom
         <input type="text" class="form-control" placeholder="Prénom" aria-label="Prénom" formControlName="firstName"
-          required>
+          >
       </label>
       <p *ngIf="firstName?.dirty && firstName?.hasError('required')">Prénom Requis</p>
-      <p *ngIf="firstName?.dirty && (firstName?.hasError('minlength') || firstName?.hasError('maxlength'))">Prénom doit faire entre 3 et 20 caratères</p>
+      <p *ngIf="firstName?.dirty && (firstName?.hasError('minlength') || firstName?.hasError('maxlength'))">Prénom doit
+        faire entre 3 et 20 caratères</p>
 
 
     </div>
 
     <div class="col">
       <label for="">Nom
-        <input type="text" class="form-control" placeholder="Nom" aria-label="Nom" formControlName="lastName" required>
+        <input type="text" class="form-control" placeholder="Nom" aria-label="Nom" formControlName="lastName" >
       </label>
       <p *ngIf="lastName?.dirty && lastName?.hasError('required')">Nom Requis</p>
-      <p *ngIf="lastName?.dirty && (lastName?.hasError('minlength') || lastName?.hasError('maxlength'))">Nom doit faire entre 3 et 20 caratères</p>
+      <p *ngIf="lastName?.dirty && (lastName?.hasError('minlength') || lastName?.hasError('maxlength'))">Nom doit faire
+        entre 3 et 20 caratères</p>
 
     </div>
   </div>
 
 
   <label for="">Email </label>
-    <input class="form-control" type="email" formControlName="email" required>
+  <input class="form-control" type="email" formControlName="email" >
 
   <p *ngIf="email?.dirty && email?.hasError('required')">Adresse mail Requise</p>
   <p *ngIf="email?.dirty && email?.hasError('email')">Ce n'est pas une adresse mail valide ex: adresse@mail.fr</p>
 
 
-  <label for="">Team  </label>
-    <select class="form-control" formControlName="team" id="team" required>
-      <option value="bleu">Bleu</option>
-      <option value="rouge">Rouge</option>
-    </select>
+  <label for="">Team </label>
+  <select class="form-control" formControlName="team" id="team" >
+    <option value="bleu">Bleu</option>
+    <option value="rouge">Rouge</option>
+  </select>
 
   <p *ngIf="team?.dirty && team?.hasError('required')">Veuillez selectionner une team</p>
 
@@ -47,16 +48,55 @@
         <!-- <label> Skill {{i}} </label> -->
         <div class="skill">
           <input class="form-control" type="text" [formControlName]="i" [value]="skill.value">
-          <button class="btn-close" *ngIf="skills.length > 0" (click)="removeSkill(i)"></button>
+          <button type="button" class="btn-close" *ngIf="skills.length > 0" (click)="removeSkill(i)"></button>
         </div>
         <p *ngIf="skill?.dirty && skill?.hasError('required')">Ex : Courir </p>
       </li>
     </ul>
 
-    <button class="btn btn-outline-primary" (click)="addSkill()">Ajouter Skill</button>
+    <button type="button" class="btn btn-outline-primary" (click)="addSkill()">Ajouter Skill</button>
 
   </div>
 
-  <button class="btn btn-primary" id="valider" (click)="onSumit(userForm)" type="submit"
-    [disabled]="!userForm.valid">Valider</button>
+  <div>
+    <label for="">Username
+      <input type="text" class="form-control" placeholder="username" aria-label="Nom" formControlName="username"
+        >
+    </label>
+    <!-- <p *ngIf="lastName?.dirty && lastName?.hasError('required')">Nom Requis</p>
+    <p *ngIf="lastName?.dirty && (lastName?.hasError('minlength') || lastName?.hasError('maxlength'))">Nom doit faire entre 3 et 20 caratères</p> -->
+  </div>
+
+  <div [formGroup]="passwordForm">
+    <div>
+      <label for="">Mot de passe
+        <input type="password" class="form-control" placeholder="Mot de passe" aria-label="Nom"
+          formControlName="password" >
+      </label>
+      <p *ngIf="password?.dirty && password?.hasError('required')">Mot de passe requis</p>
+    <!-- <p *ngIf="lastName?.dirty && (lastName?.hasError('minlength') || lastName?.hasError('maxlength'))">Nom doit faire entre 3 et 20 caratères</p> -->
+
+    </div>
+    <div>
+      <label for="">Confirmation de Mot de passe
+        <input type="password" class="form-control" placeholder="corfirmation de mot de passe" aria-label="Nom"
+          formControlName="verifpassword" >
+      </label>
+      <p *ngIf="verifpassword?.dirty && verifpassword?.hasError('required')">Mot de passe requis</p>
+
+    </div>
+  </div>
+
+  <div>
+    <label for="">Date de naissance
+      <input type="date" class="form-control" placeholder="18" aria-label="age" formControlName="birthdate" >
+    </label>
+    <p *ngIf="birthdate?.dirty && birthdate?.hasError('required')">Age requis</p>
+    <p *ngIf="birthdate?.dirty && birthdate?.hasError('tooYoung')">Vous devez avoir 18 ans ou plus </p>
+  </div>
+
+
+
+  <button class="btn btn-primary" id="valider" type="submit"
+    [disabled]="userForm.invalid">Valider</button>
 </form>
