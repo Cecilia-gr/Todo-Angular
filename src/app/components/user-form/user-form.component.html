@@ -74,18 +74,21 @@
           formControlName="password" >
       </label>
       <p *ngIf="password?.dirty && password?.hasError('required')">Mot de passe requis</p>
-    <!-- <p *ngIf="lastName?.dirty && (lastName?.hasError('minlength') || lastName?.hasError('maxlength'))">Nom doit faire entre 3 et 20 caratères</p> -->
-
+      <p *ngIf="password?.dirty && (password?.hasError('minlength') || password?.hasError('maxlength'))">Le mot de passe doit faire entre 6 et 20 caratères</p>
     </div>
     <div>
       <label for="">Confirmation de Mot de passe
         <input type="password" class="form-control" placeholder="corfirmation de mot de passe" aria-label="Nom"
-          formControlName="verifpassword" >
+          formControlName="confirmpassword" >
       </label>
-      <p *ngIf="verifpassword?.dirty && verifpassword?.hasError('required')">Mot de passe requis</p>
+      <p *ngIf="confirmpassword?.dirty && confirmpassword?.hasError('required')">Mot de passe requis</p>
+      <p *ngIf="confirmpassword?.dirty && (confirmpassword?.hasError('minlength') || confirmpassword?.hasError('maxlength'))">Le mot de passe doit faire entre 6 et 20 caratères</p>
 
     </div>
+
+    <p *ngIf="passwordForm?.dirty && passwordForm?.hasError('matchingError')"> les Deux mot de passe ne sont pas identique</p>
   </div>
+
 
   <div>
     <label for="">Date de naissance

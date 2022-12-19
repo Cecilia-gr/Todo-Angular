@@ -4,6 +4,8 @@ import { Form, FormArray, FormBuilder, FormControl, FormGroup, Validators } from
 import { Router } from '@angular/router';
 import { User } from 'src/app/class/user.model';
 import { UserService } from 'src/app/services/user.service';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-user-form',
@@ -19,18 +21,23 @@ export class UserFormComponent {
  skills: FormArray;
  birthdate : FormControl;
  passwordForm : FormGroup;
- verifpassword : FormControl;
+ confirmpassword : FormControl;
  password : FormControl;
  username : FormControl;
+ passwordStrength :number = 0;
 
 
  static isOldEnough = (control : FormControl) => {
-  // control est l'entrée de la date
-
   const birthDateplus18 = new Date(control.value);
   birthDateplus18.setFullYear(birthDateplus18.getFullYear() + 18);
   return birthDateplus18 < new Date() ? null: { tooYoung: true};
  }
+
+static passwordMatch(group : FormGroup){
+  const password = group.get('password')?.value;
+  const confirm = group.get('confirm')?.value;
+  return password === confirm ? null : {matchingError: true} ;
+}
 
   constructor(private fb : FormBuilder, private router: Router, private userservice : UserService){
     this.firstName = this.fb.control('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]);
@@ -39,12 +46,15 @@ export class UserFormComponent {
     this.team = this.fb.control('', [Validators.required]);
     this.skills = this.fb.array(['']);
     this.birthdate = this.fb.control('', [Validators.required, UserFormComponent.isOldEnough]);
-    this.password = this.fb.control('', [Validators.required]);
-    this.verifpassword = this.fb.control('', [Validators.required]);
+    this.password = this.fb.control('', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]);
+    this.confirmpassword = this.fb.control('', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]);
     this.username = this.fb.control('', [Validators.required]);
+
     this.passwordForm = this.fb.group({
       password : this.password,
-      verifpassword : this.verifpassword
+      confirm : this.confirmpassword
+    }, {
+      validators: UserFormComponent.passwordMatch,
     });
 
     this.userForm = this.fb.group({
@@ -57,6 +67,12 @@ export class UserFormComponent {
       username : this.username,
       passwordForm : this.passwordForm,
     });
+
+    this.password.valueChanges.pipe(
+      debounceTime(400),
+      distinctUntilChanged()
+      ).subscribe(newValue => this.passwordStrength = newValue.length);
+
   }
 
   onInit(){
