@@ -82,10 +82,10 @@
           formControlName="confirmpassword" >
       </label>
       <p *ngIf="confirmpassword?.dirty && confirmpassword?.hasError('required')">Mot de passe requis</p>
-      <p *ngIf="confirmpassword?.dirty && (confirmpassword?.hasError('minlength') || confirmpassword?.hasError('maxlength'))">Le mot de passe doit faire entre 6 et 20 caratères</p>
+      <!-- <p *ngIf="confirmpassword?.dirty && (confirmpassword?.hasError('minlength') || confirmpassword?.hasError('maxlength'))">Le mot de passe doit faire entre 6 et 20 caratères</p> -->
 
     </div>
-
+    <p> strength :  {{passwordStrength}}</p>
     <p *ngIf="passwordForm?.dirty && passwordForm?.hasError('matchingError')"> les Deux mot de passe ne sont pas identique</p>
   </div>
 
