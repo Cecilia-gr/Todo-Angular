@@ -1,6 +1,6 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component } from '@angular/core';
-import { Form, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, ControlContainer, Form, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/class/user.model';
 import { UserService } from 'src/app/services/user.service';
@@ -19,19 +19,25 @@ export class UserFormComponent {
  email: FormControl;
  team: FormControl;
  skills: FormArray;
- birthdate : FormControl;
+ ageCtrl : FormControl;
  passwordForm : FormGroup;
  confirmpassword : FormControl;
  password : FormControl;
- username : FormControl;
+ usernameCrtl : FormControl;
  passwordStrength :number = 0;
 
 
- static isOldEnough = (control : FormControl) => {
-  const birthDateplus18 = new Date(control.value);
-  birthDateplus18.setFullYear(birthDateplus18.getFullYear() + 18);
-  return birthDateplus18 < new Date() ? null: { tooYoung: true};
+//  static isOldEnough = (control : FormControl) => {
+//   const birthDateplus18 = new Date(control.value);
+//   birthDateplus18.setFullYear(birthDateplus18.getFullYear() + 18);
+//   return birthDateplus18 < new Date() ? null: { tooYoung: true};
+//  }
+
+ static ageIsOk = (control : FormControl) => {
+  return (control.value > 64 &&  control.value < 100 )? null: { AgeOk: true};
  }
+
+
 
 static passwordMatch(group : FormGroup){
   const password = group.get('password')?.value;
@@ -45,10 +51,10 @@ static passwordMatch(group : FormGroup){
     this.email = this.fb.control('', [Validators.required, Validators.email]);
     this.team = this.fb.control('', [Validators.required]);
     this.skills = this.fb.array(['']);
-    this.birthdate = this.fb.control('', [Validators.required, UserFormComponent.isOldEnough]);
+    this.ageCtrl = this.fb.control('', [Validators.required, UserFormComponent.ageIsOk]);
     this.password = this.fb.control('', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]);
     this.confirmpassword = this.fb.control('', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]);
-    this.username = this.fb.control('', [Validators.required]);
+    this.usernameCrtl = this.fb.control('', [Validators.required, control => this.isUsernameAvialable(control)]);
 
     this.passwordForm = this.fb.group({
       password : this.password,
@@ -63,8 +69,8 @@ static passwordMatch(group : FormGroup){
       email: this.email,
       team: this.team,
       skills : this.skills,
-      birthdate : this.birthdate,
-      username : this.username,
+      age : this.ageCtrl,
+      username : this.usernameCrtl,
       passwordForm : this.passwordForm,
     });
 
@@ -75,7 +81,7 @@ static passwordMatch(group : FormGroup){
 
   }
 
-  onInit(){
+  ngonInit(){
 
   }
 
@@ -91,13 +97,18 @@ static passwordMatch(group : FormGroup){
     this.skills.removeAt(index);
   }
 
-
   onSubmit(userForm : FormGroup) :void{
-    this.userservice.addUser(new User(userForm.value.firstName, userForm.value.lastName, userForm.value.email, userForm.value.team, userForm.value.skills));
+    console.log(userForm.value.birthdate);
+
+
+    this.userservice.addUser(new User(userForm.value.firstName, userForm.value.lastName, userForm.value.email, userForm.value.team, userForm.value.skills,userForm.value.username, userForm.value.password, userForm.value.age ));
     this.router.navigate(['userlist']);
   }
 
-
+  isUsernameAvialable(control : AbstractControl) {
+    const username = control.value;
+    return !this.userservice.isUsernameAvialable(username) ?  null : {alreadyUsed : true};
+  }
 
   trackByFunction
   (index: number, item: any): string {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, isEmpty, Observable } from 'rxjs';
 import { User } from '../class/user.model';
 
 const initialList : User[] = [
@@ -39,10 +39,16 @@ export class UserService {
   }
 
   public addUser(user: User): void {
+    console.log(user);
+
     this.users.push(user);
     this.emiter(this.users);
     this.router.navigate(['userlist']);
   }
 
+  public isUsernameAvialable (username : string) :boolean{
+    let collection = this.users.filter( user => user.username == username)
+    return collection.length > 0 ? true : false;
+  }
 
 }
