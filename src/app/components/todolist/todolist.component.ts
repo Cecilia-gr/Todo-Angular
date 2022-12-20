@@ -18,7 +18,7 @@ export class TodolistComponent {
   ngOnInit() {
     this.task$ = this.todolistService.getTasks();
     this.getTasks();
-    this.todolistService.save()
+    this.todolistService.load();
   }
 
   getTasks(): void {

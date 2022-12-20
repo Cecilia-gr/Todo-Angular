@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Task } from '../class/task.model';
 
-const initialList = [
-  new Task("Se lever", true, "Lorem ipsum dolor sit amet consectetur adipisicing elit."),
-  new Task("S'étirer ", false, "Lorem ipsum dolor sit amet consectetur adipisicing elit."),
-  new Task("Raller ", false, "Lorem ipsum dolor sit amet consectetur adipisicing elit.")
-];
+// const initialList = [
+//   new Task("Se lever", true, "Lorem ipsum dolor sit amet consectetur adipisicing elit."),
+//   new Task("S'étirer ", false, "Lorem ipsum dolor sit amet consectetur adipisicing elit."),
+//   new Task("Raller ", false, "Lorem ipsum dolor sit amet consectetur adipisicing elit.")
+// ];
 
 // const toDoListSubject = new Subject();
 
@@ -24,13 +24,13 @@ export class TodolistService {
     this.tasks = [];
     this._task = new BehaviorSubject<Task[]>(this.tasks);
     this.task$ = this._task.asObservable();
-    this.prom = new Promise<string>((resolve) => {
-      // setTimeout(() => {
-        this.tasks = initialList;
-        this.emiter(this.tasks);
-        resolve('fini');
-      // }, 1000)
-    })
+    // this.prom = new Promise<string>((resolve) => {
+    //   // setTimeout(() => {
+    //     this.tasks = initialList;
+    //     this.emiter(this.tasks);
+    //     resolve('fini');
+    //   // }, 1000)
+    // })
 
   }
 
@@ -53,6 +53,7 @@ export class TodolistService {
 
   toggleComplete(id: number): void {
     this.tasks[id].completed = !this.tasks[id].completed;
+    this.save();
   }
 
   getTaskById(id: number): Task | null {
@@ -68,15 +69,30 @@ export class TodolistService {
   }
 
   addTask(task: Task) {
+    console.log(task);
+
     this.tasks.push(task);
     this.emiter(this.tasks);
+    console.log(this.tasks);
+
+    this.save();
   }
 
   save () {
     this.http.put( 'https://todo-aeb69-default-rtdb.europe-west1.firebasedatabase.app' +'/tasks.json', this.tasks)
     .subscribe();
-
   }
 
+  // modifTask() {
+  //   this.save();
+  // }
+
+  load () {
+    this.http.get('https://todo-aeb69-default-rtdb.europe-west1.firebasedatabase.app/tasks.json')
+    .subscribe((response : any) => {
+      this._task.next(Object.assign(this.tasks, response))
+    });
+
+  }
 
 }
