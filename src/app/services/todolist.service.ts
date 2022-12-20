@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Task } from '../class/task.model';
@@ -19,16 +20,16 @@ export class TodolistService {
   private readonly task$: Observable<Task[]>;
   public prom!: Promise<string>;
 
-  constructor() {
+  constructor(private http : HttpClient) {
     this.tasks = [];
     this._task = new BehaviorSubject<Task[]>(this.tasks);
     this.task$ = this._task.asObservable();
     this.prom = new Promise<string>((resolve) => {
-      setTimeout(() => {
+      // setTimeout(() => {
         this.tasks = initialList;
         this.emiter(this.tasks);
         resolve('fini');
-      }, 1000)
+      // }, 1000)
     })
 
   }
@@ -69,6 +70,12 @@ export class TodolistService {
   addTask(task: Task) {
     this.tasks.push(task);
     this.emiter(this.tasks);
+  }
+
+  save () {
+    this.http.put( 'https://todo-aeb69-default-rtdb.europe-west1.firebasedatabase.app' +'/tasks.json', this.tasks)
+    .subscribe();
+
   }
 
 
