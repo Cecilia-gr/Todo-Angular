@@ -46,9 +46,9 @@ static passwordMatch(group : FormGroup){
 }
 
   constructor(private fb : FormBuilder, private router: Router, private userservice : UserService){
-    this.firstName = this.fb.control('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]);
-    this.lastName = this.fb.control('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]);
-    this.email = this.fb.control('', [Validators.required, Validators.email]);
+    this.firstName = this.fb.control('', {validators : [Validators.required, Validators.minLength(3), Validators.maxLength(20)], updateOn : 'blur'});
+    this.lastName = this.fb.control('', {validators : [Validators.required, Validators.minLength(3), Validators.maxLength(20)], updateOn: 'blur'});
+    this.email = this.fb.control('', {validators : [Validators.required, Validators.email], updateOn: 'blur'});
     this.team = this.fb.control('', [Validators.required]);
     this.skills = this.fb.array(['']);
     this.ageCtrl = this.fb.control('', [Validators.required, UserFormComponent.ageIsOk]);

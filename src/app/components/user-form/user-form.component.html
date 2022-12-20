@@ -60,10 +60,9 @@
 
   <div>
     <label for="">Username
-      <input type="text" class="form-control" placeholder="username" aria-label="Nom" formControlName="username"
-        >
+      <input type="text" class="form-control" placeholder="username" aria-label="Nom" formControlName="username" [ngClass]="usernameCrtl.hasError('alreadyUsed')? 'is-invalid' : null ">
     </label>
-    <p *ngIf="usernameCrtl.dirty && usernameCrtl.hasError('alreadyUsed')">pseudo non disponible</p>
+    <p *ngIf="usernameCrtl.dirty && usernameCrtl.hasError('alreadyUsed')" >pseudo non disponible</p>
     <!-- <p *ngIf="lastName?.dirty && lastName?.hasError('required')">Nom Requis</p>
     <p *ngIf="lastName?.dirty && (lastName?.hasError('minlength') || lastName?.hasError('maxlength'))">Nom doit faire entre 3 et 20 caratères</p> -->
   </div>
@@ -96,7 +95,7 @@
       <input type="number" class="form-control" placeholder="65" aria-label="age" formControlName="age" >
     </label>
     <p *ngIf="ageCtrl?.dirty && ageCtrl?.hasError('required')">Age requis</p>
-    <p *ngIf="ageCtrl?.dirty && ageCtrl?.hasError('AgeOk')">Vous devez avoir entre 65 et 99ans </p>
+    <p *ngIf="ageCtrl?.dirty && ageCtrl?.hasError('AgeOk')" >Vous devez avoir entre 65 et 99ans </p>
   </div>
 
 
