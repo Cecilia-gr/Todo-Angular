@@ -95,4 +95,15 @@ export class TodolistService {
 
   }
 
+  addId() {
+    if(this.tasks.length > 0){
+      let lastTask  : Task = this.tasks[this.tasks.length-1];
+      console.log(lastTask.id);
+      return lastTask.id +1;
+    }else{
+      return 0;
+    }
+  }
+
+
 }

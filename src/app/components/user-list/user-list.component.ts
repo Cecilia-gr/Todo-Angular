@@ -19,8 +19,13 @@ export class UserListComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.users$ = this.userservice.getUsers$();
     this.getUsers();
+    this.userservice.load();
+
+    for (const user of this.users) {
+      console.log(user.skills)
+    }
   }
-  
+
   ngOnDestroy(): void {
     this.subscribe?.unsubscribe();
   }

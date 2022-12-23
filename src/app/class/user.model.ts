@@ -5,14 +5,14 @@ export class User {
   team: string;
   skills: string[];
   id :number;
-  private static index :number = 0;
+  // private static index :number = 0;
   age : number;
   password : string;
   username : string;
 
 
-  constructor(firstName: string = "", lastName: string = "", email: string = "", team: string = "", skills: string[] = [], username : string = "", password : string = "", age : number = 0) {
-    this.id = User.index++;
+  constructor(firstName: string = "", lastName: string = "", email: string = "", team: string = "", skills: string[] = [], username : string = "", password : string = "", age : number = 0, id : number = 0) {
+    this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;

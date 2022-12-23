@@ -2,11 +2,11 @@
 <div>
   <mat-card *ngFor="let user of users; trackBy:trackByFunction">
     <div>
-      {{user.firstName}} {{user.lastName | uppercase}}, {{user.age}}ans
+      <p><span>{{user.id}} </span> - {{user.firstName}} {{user.lastName | uppercase}}, {{user.age}}ans</p>
       <p>username : {{user.username}}</p>
       <p>email {{user.email}}</p>
       <p>Team : {{user.team}}</p>
-      <div *ngIf=" user.skills.length > 0 ">
+      <div *ngIf=" user.skills != undefined ">
         Skills :
         <ul *ngFor="let skill of user.skills; trackBy:trackByFunction">
           <li> {{skill}} </li>

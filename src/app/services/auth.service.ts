@@ -9,7 +9,7 @@ export class AuthService {
   isAuth : boolean;
 
   constructor(public router : Router) {
-    this.isAuth = false ;
+    this.isAuth = true ;
   }
 
   login(){

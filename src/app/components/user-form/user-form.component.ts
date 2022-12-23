@@ -82,7 +82,7 @@ static passwordMatch(group : FormGroup){
   }
 
   ngonInit(){
-
+    this.userservice.load();
   }
 
   getSkills() {//FormArray
@@ -101,7 +101,7 @@ static passwordMatch(group : FormGroup){
     console.log(userForm.value.birthdate);
 
 
-    this.userservice.addUser(new User(userForm.value.firstName, userForm.value.lastName, userForm.value.email, userForm.value.team, userForm.value.skills,userForm.value.username, userForm.value.password, userForm.value.age ));
+    this.userservice.addUser(new User(userForm.value.firstName, userForm.value.lastName, userForm.value.email, userForm.value.team, userForm.value.skills,userForm.value.username, userForm.value.password, userForm.value.age, this.userservice.addId()));
     this.router.navigate(['userlist']);
   }
 
